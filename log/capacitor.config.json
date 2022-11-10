@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "log",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
