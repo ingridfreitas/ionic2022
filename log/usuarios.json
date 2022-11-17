@@ -1,0 +1,10 @@
+{
+  "usuarios": [
+    {
+      "nome": "Ingrid",
+      "cpf": "50318808803",
+      "email": "ingrid@gmail.com",
+      "senha": "marvel"
+    }
+  ]
+}

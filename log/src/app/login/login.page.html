@@ -15,12 +15,12 @@
       </ion-item>
     </ion-card-content>
     <div class="but">
-      <ion-button expand="block" color="roxo">Entrar</ion-button>
+      <ion-button expand="block" color="roxo" (click)="entrar()">Entrar</ion-button>
       <ion-button expand="block">Esqueceu a Senha</ion-button>
       <br>
       <br>
       <h5>Ainda não tem conta? Damos um jeitinho:</h5>
-      <ion-button expand="block">Registrar</ion-button>
+      <ion-button expand="block" [routerLink]="['/cadastro']">Registrar</ion-button>
     </div>
   </ion-card>
 </ion-content>
