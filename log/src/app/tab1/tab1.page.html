@@ -1,26 +1,58 @@
-<ion-content [fullscreen]="true" color="roxo">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
-    </ion-card-header>
+<ion-header [translucent]="true">
+  <ion-toolbar color="roxo">
+    <ion-title>
+      Cadastro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true">
+
+  <ion-card>
     <ion-card-content>
-      <ion-item>
-        <ion-label position="floating" color="roxo">E-Mail</ion-label>
-        <ion-input placeholder="user.name@mail.com"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="roxo">Senha</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
+      <form [formGroup]="pcad">
+        <ion-item>
+          <ion-label position="floating" color="roxo">Nome</ion-label>
+          <ion-input type="text" formControlName="nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="roxo">Descrição</ion-label>
+          <ion-input type="text" placeholder="000.000.000-00" formControlName="desc"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="roxo">Validade</ion-label>
+          <ion-input type="date" placeholder="user.name@mail.com" formControlName="validade"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="roxo">Preço (R$)</ion-label>
+          <ion-input type="text" formControlName="preco" placeholder="R$0,00"></ion-input>
+        </ion-item>
+      </form>
+      <ion-button expand="block" color="roxo" (click)="salvarProduto()">Cadastrar Produto</ion-button>
     </ion-card-content>
-    <div class="but">
-      <ion-button expand="block" color="roxo">Entrar</ion-button>
-      <ion-button expand="block">Esqueceu a Senha</ion-button>
-      <br>
-      <br>
-      <h5>Ainda não tem conta? Damos um jeitinho:</h5>
-      <ion-button expand="block" [routerLink]="['/cadastro']">Registrar</ion-button>
-    </div>
   </ion-card>
+
+  <ion-item-sliding *ngFor="let pd of listap">
+    <ion-item lines="none">
+      <ion-label color="roxo">{{pd.nome}}</ion-label>
+      <ion-chip color="success">
+        <ion-icon name="cash-outline"></ion-icon>
+        <ion-label>R${{pd.preco}}</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap">{{pd.desc}}</ion-label>
+      <ion-chip color="roxo">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>{{pd.validade}}</ion-label>
+      </ion-chip>
+    </ion-item>
+
+    <ion-item-options>
+      <ion-item-option color="danger" (click)="excluir(pd.email)">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-content>

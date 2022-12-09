@@ -5,30 +5,29 @@ ion-content {
 }
 
 ion-card {
-    height: 450px;
     border-radius: 10px;
-    margin-top: 200px;
 
     ion-card-title {
         font-size: 2rem;
     }
-
-    .but {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-    }
 }
 
 ion-button {
-    --background: #fff;
-    --color: var(--ion-color-roxo);
-    --border-radius: 5px;
-    --border-color: var(--ion-color-roxo);
-    --border-style: solid;
-    --border-width: 1px;
+    margin-top: 15px;
 }
 
 h5 {
     font-size: 15px;
+}
+
+ion-title {
+    text-align: center;
+}
+
+#datetime {
+    color: #000;
+}
+
+.calendar-action-buttons ion-item ion-label {
+    color: #9f6bff !important;
 }

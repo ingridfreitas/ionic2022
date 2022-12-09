@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Produtos, Usuario } from '../services/model';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -8,17 +10,40 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
 
-  formLogin = this.formb.group({
-  email: ['', Validators.compose([Validators.required, Validators.email])], 
-  senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
-})
+  loggin: FormGroup;
+  listauser: Usuario[] = []
 
-  constructor(private formb: FormBuilder) { }
 
-  ngOnInit() {
+  constructor(private formb: FormBuilder, private storage: StorageService) {
+    this.loggin = this.formb.group({
+      email: ['', Validators.compose ([Validators.required, Validators.email])],
+      senha: ['', Validators.required]
+    });
   }
 
-  entrar(){
+
+  async user() {
+    if (this.listauser[i].email != undefined) {
+      this.listauser = this.storage.getAll()
+    }
+  }
+
+  ionViewDidEnter() {
+    console.log(this.listauser)
+  
+  }
+
+  ngOnInit() {
+    this.user()
+  }
+
+  entrar() {
+    for (let i = 0; this.listauser.length > i; i++) {
+      console.log(this.listauser.values['email'])
+      if ((this.loggin.value['email'] == this.listauser[i].nome) && (this.loggin.value['senha'] == this.listauser[i].senha)) {
+        console.log('Logado')
+      }
+    }
   }
 
 }

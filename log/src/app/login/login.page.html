@@ -5,14 +5,16 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item>
-        <ion-label position="floating" color="roxo">E-Mail</ion-label>
-        <ion-input placeholder="user.name@mail.com"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="roxo">Senha</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
+      <form [formGroup]="loggin">
+        <ion-item>
+          <ion-label position="floating" color="roxo">E-Mail</ion-label>
+          <ion-input placeholder="user.name@mail.com" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="roxo">Senha</ion-label>
+          <ion-input type="password" formControlName="senha"></ion-input>
+        </ion-item>
+      </form>
     </ion-card-content>
     <div class="but">
       <ion-button expand="block" color="roxo" (click)="entrar()">Entrar</ion-button>

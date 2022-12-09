@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Produtos } from '../services/model';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,23 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private storage: StorageService) {}
+
+  listap: Produtos[] = []
+
+  
+
+  async prod(){
+    this.listap = this.storage.getAll()
+  }
+
+  ionViewDidEnter(){
+    this.prod();
+  }
+
+  async excluir(nome: string){
+    await this.storage.remove(nome)
+    this.prod()
+  }
 
 }

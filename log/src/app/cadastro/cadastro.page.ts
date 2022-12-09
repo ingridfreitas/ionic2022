@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Usuario } from '../model';
-import { ServicesService } from '../services.service';
+import { AlertController } from '@ionic/angular';
+import { Usuario } from '../services/model';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,40 +12,64 @@ import { ServicesService } from '../services.service';
 })
 export class CadastroPage implements OnInit {
 
-  nome: string;
-  cpf: string;
-  email: string;
-  senha: string;
-  cosenha: string
+  fcad: FormGroup;
+  usuario: Usuario = new Usuario()
 
-  usuario: Usuario[]
-
-  user = {} as Usuario;
-
-  ngOnInit() {
+  erros = {
+    nome: [
+      {tipo: 'required', mensagem: 'O campo nome é OBRIGATÓRIO'}
+    ],
+    cpf: [
+      {tipo: 'required', mensagem: 'O campo cpf é OBRIGATÓRIO'},
+      {tipo: 'minLength', mensagem: 'O campo nome deve possuir no mínimo 11 caracteres'}
+    ],
+    email: [
+      {tipo: 'required', mensagem: 'O campo email é OBRIGATÓRIO'},
+      {tipo: 'email', mensagem: 'O campo email deve ser de email'}
+    ],
+    senha: [
+      {tipo: 'required', mensagem: 'O campo senha é OBRIGATÓRIO'},
+      {tipo: 'minLength', mensagem: 'O campo senha deve possuir no mínimo 8 caracteres'}
+    ],
+    cosenha: [
+      {tipo: 'required', mensagem: 'O campo senha é OBRIGATÓRIO'},
+      {tipo: 'minLength', mensagem: 'O campo confirmar senha deve possuir no mínimo 8 caracteres'}
+    ]
   }
 
-  constructor(private http: HttpClient, private router: Router, private service: ServicesService) {
+  ngOnInit() { }
+
+  constructor(private fbuild: FormBuilder, private alertController: AlertController, private storage: StorageService, private route: Router) {
+    this.fcad = this.fbuild.group({
+      nome: ['', Validators.required],
+      cpf: ['', Validators.compose([Validators.required, Validators.minLength(11)])],
+      email: ['', Validators.compose([Validators.email, Validators.required])],
+      senha: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+      cosenha: ['', Validators.compose([Validators.required, Validators.minLength(8)])]
+    });
   }
 
-  salvar() {
-    const user: Usuario = {
-      nome: this.nome,
-      cpf: this.cpf,
-      email: this.email,
-      senha: this.senha
+  async salvarUser(){
+    if(this.fcad.valid){
+      this.usuario.nome = this.fcad.value.nome;
+      this.usuario.cpf = this.fcad.value.cpf;
+      this.usuario.email = this.fcad.value.email;
+      this.usuario.senha = this.fcad.value.senha;
+      await this.storage.set(this.usuario.email, this.usuario)
+      this.route.navigateByUrl('/login')
     }
-
-    console.log(this.user.nome)
-    console.log(this.user.cpf)
-    console.log(this.user.email)
-    console.log(this.user.senha)
-
-
-    this.service.criarUsuario(user).subscribe(user => {
-      console.log(user)
-    })
+    else{
+      this.presentAlert()
+    }
   }
 
-  
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'ERRO!!',
+      message: 'Não foi possível concluir o cadastro',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 }
