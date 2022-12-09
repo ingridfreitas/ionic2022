@@ -13,15 +13,15 @@
       <form [formGroup]="pcad">
         <ion-item>
           <ion-label position="floating" color="roxo">Nome</ion-label>
-          <ion-input type="text" formControlName="nome"></ion-input>
+          <ion-input type="text" formControlName="nome_prod"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating" color="roxo">Descrição</ion-label>
-          <ion-input type="text" placeholder="000.000.000-00" formControlName="desc"></ion-input>
+          <ion-input type="text" formControlName="desc"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating" color="roxo">Validade</ion-label>
-          <ion-input type="date" placeholder="user.name@mail.com" formControlName="validade"></ion-input>
+          <ion-input type="date" placeholder="dd/mm/yyyy" formControlName="validade"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -35,7 +35,7 @@
 
   <ion-item-sliding *ngFor="let pd of listap">
     <ion-item lines="none">
-      <ion-label color="roxo">{{pd.nome}}</ion-label>
+      <ion-label color="roxo">{{pd.nome_prod}}</ion-label>
       <ion-chip color="success">
         <ion-icon name="cash-outline"></ion-icon>
         <ion-label>R${{pd.preco}}</ion-label>

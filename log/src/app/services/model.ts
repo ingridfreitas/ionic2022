@@ -6,7 +6,7 @@ export class Usuario {
 }
 
 export class Produtos {
-    nome: string;
+    nome_prod: string;
     desc: string;
     validade: string;
     preco: string;

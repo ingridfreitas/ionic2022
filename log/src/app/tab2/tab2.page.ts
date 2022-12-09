@@ -15,7 +15,7 @@ export class Tab2Page {
 
   
 
-  async prod(){
+  async prod(){      
     this.listap = this.storage.getAll()
   }
 

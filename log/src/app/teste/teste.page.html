@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true" color="roxo">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Cadastro</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="fcad">
+        <ion-item>
+          <ion-label position="floating" color="roxo">Nome</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="roxo">CPF</ion-label>
+          <ion-input type="text" placeholder="000.000.000-00"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="roxo">E-Mail</ion-label>
+          <ion-input placeholder="user.name@mail.com"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="roxo">Senha</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="roxo">Confirmar Senha</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
